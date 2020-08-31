@@ -1,38 +1,152 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
+/* Global Styles */
+:root {
+  --primary-color: #4a90e2;
+  --dark-color: #1f2532;
+  --dark-light-color: #606c78;
+  --light-color: #f2f1f1;
+  --light2-color: #d8d8d8;
+  --danger-color: #e85b0e;
+  --success-color: #a0da5e;
+  --purple-color: #be93e7;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+html {
+  /* This defines what 1rem is (10px) */
+  font-size: 62.5%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body {
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  background: url('./images/Background_2.png') no-repeat center center / cover;
+}
+
+/* btn */
+
+.btn {
+  display: inline-block;
+  background: var(--primary-color);
+  color: var(--dark-color);
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 0.6rem 4rem;
+  font-size: 1.6rem;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in;
+  outline: none;
+}
+
+.container {
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Navbar */
+.navbar {
+  padding: 1rem 0;
+  z-index: 1;
+  width: 100%;
+  border-top: solid 3px var(--primary-color);
+  background-color: var(--dark-color);
+  opacity: 0.9;
+}
+
+.nav-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
+}
+
+.nav-container h1,
+.nav-container img {
+  margin-left: 0.6rem;
+}
+
+.navbar h1 {
+  color: var(--light-color);
+  font-weight: 700;
+}
+
+/* banner top */
+
+.banner__top {
+  background-color: var(--light-color);
+  padding: 5.4rem 0;
+}
+
+.banner__top h1 {
+  margin-left: 6rem;
+  color: var(--dark-color);
+}
+
+/* pokemons grid */
+
+.pokemons-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 21.6rem);
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  column-gap: 13px;
+  row-gap: 6rem;
+  background-color: var(--light-color);
 }
 
-.App-link {
-  color: #61dafb;
+/* pokemon card */
+
+.card {
+  width: 21.6rem;
+  height: 23.8rem;
+  background-color: var(--light2-color);
+  border-radius: 6px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card-header {
+  display: flex;
+}
+
+.card-id {
+  font-weight: 300;
+}
+
+.card-name {
+  margin-left: 0.6rem;
+  text-transform: capitalize;
+  font-weight: 700;
+  color: var(--dark-color);
+}
+
+.card img {
+  width: 85%;
+  height: auto;
+  object-fit: cover;
+}
+
+.card-img {
+  margin-top: 0.6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* banner bottom */
+
+.banner__bottom {
+  background-color: var(--light-color);
+  padding: 6rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
