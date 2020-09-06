@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 
+import Spinner from '../layout/Spinner';
 import PokemonCard from './PokemonCard';
 
 const fetchPokemons = async (key, offset) => {
@@ -21,7 +22,11 @@ const Pokemons = () => {
         <h1>POKÉDEX</h1>
       </div>
 
-      {status === 'loading' && <div>Loading data...</div>}
+      {status === 'loading' && (
+        <div>
+          <Spinner />
+        </div>
+      )}
 
       {status === 'error' && <div>Error fetching data</div>}
 
