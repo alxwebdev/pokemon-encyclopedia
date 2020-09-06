@@ -1,19 +1,22 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Navbar from './components/layout/Navbar';
-import BannerTop from './components/layout/BannerTop';
-import BannerBottom from './components/layout/BannerBottom';
 import PokemonList from './components/Pokemons/PokemonList';
+import Pokemon from './components/Pokemons/Pokemon';
 
 import './App.css';
 
 const App = () => {
   return (
     <div>
-      <Navbar />
-      <BannerTop />
-      <PokemonList />
-      <BannerBottom />
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route exact path='/' component={PokemonList} />
+          <Route exact path='/pokemon/:pokemonIndex' component={Pokemon} />
+        </Switch>
+      </Router>
     </div>
   );
 };

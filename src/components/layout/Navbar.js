@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import pokeball from '../../images/pokeball.png';
 
@@ -8,7 +9,9 @@ const Navbar = () => {
       <div className='container'>
         <div className='nav-container'>
           <img src={pokeball} alt={pokeball} />
-          <h1>POKÉDEX</h1>
+          <Link to='/'>
+            <h1>POKÉDEX</h1>
+          </Link>
         </div>
       </div>
     </nav>

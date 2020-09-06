@@ -1,44 +1,52 @@
-import React, { useState, useEffect } from 'react';
-
-import axios from 'axios';
+import React, { useState } from 'react';
+import { useQuery } from 'react-query';
 
 import PokemonCard from './PokemonCard';
 
-const API_BASE_URL = 'https://pokeapi.co/api/v2/pokemon/';
+const fetchPokemons = async (key, offset) => {
+  const res = await fetch(
+    `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=16`
+  );
+  return res.json();
+};
 
 const Pokemons = () => {
-  const [data, setData] = useState([]);
+  const [offset, setOffset] = useState([0]);
 
-  const fetchPokemon = async () => {
-    const result = await axios.get(API_BASE_URL, {
-      params: {
-        limit: 16,
-      },
-    });
-    setData(result.data.results);
-  };
-
-  useEffect(() => {
-    fetchPokemon();
-  }, []);
+  const { data, status } = useQuery(['pokemons', offset], fetchPokemons);
 
   return (
-    <div className='container'>
-      {console.log(data)}
-      <div className='pokemons-grid'>
-        {data.map((pokemon, index) => {
-          return (
-            <PokemonCard
-              key={pokemon.name}
-              id={index + 1}
-              name={pokemon.name}
-              image={`https://pokeres.bastionbot.org/images/pokemon/${
-                index + 1
-              }.png`}
-            />
-          );
-        })}
+    <div>
+      <div className='container banner__top'>
+        <h1>POKÉDEX</h1>
       </div>
+
+      {status === 'loading' && <div>Loading data...</div>}
+
+      {status === 'error' && <div>Error fetching data</div>}
+
+      {status === 'success' && (
+        <div className='container'>
+          <div className='pokemons-grid'>
+            {data.results.map((pokemon, index) => (
+              <PokemonCard
+                key={pokemon.name}
+                name={pokemon.name}
+                url={pokemon.url}
+                id={index + 1}
+              />
+            ))}
+          </div>
+          <div className='banner__bottom'>
+            <button className='btn-danger' onClick={() => setOffset(16)}>
+              16 more
+            </button>
+            <button className='btn-primary' onClick={() => setOffset(32)}>
+              16 more
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
