@@ -62,7 +62,7 @@ a {
   text-transform: uppercase;
   text-decoration: none;
   font-weight: 700;
-  padding: 0.6rem 4rem;
+  padding: 0.6rem 2.3rem;
   font-size: 1.6rem;
   border: none;
   cursor: pointer;
@@ -111,6 +111,11 @@ a {
 
 .banner__top h1 {
   margin-left: 6rem;
+  color: var(--dark-color);
+}
+
+.banner__top span {
+  font-weight: 300;
   color: var(--dark-color);
 }
 

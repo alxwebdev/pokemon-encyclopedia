@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useQuery } from 'react-query';
+import { usePaginatedQuery } from 'react-query';
 
 import Spinner from '../layout/Spinner';
 import PokemonCard from './PokemonCard';
@@ -12,14 +12,22 @@ const fetchPokemons = async (key, offset) => {
 };
 
 const Pokemons = () => {
-  const [offset, setOffset] = useState([0]);
+  const [offset, setOffset] = useState(0);
 
-  const { data, status } = useQuery(['pokemons', offset], fetchPokemons);
+  const { resolvedData, latestData, status } = usePaginatedQuery(
+    ['pokemons', offset],
+    fetchPokemons
+  );
 
   return (
     <div>
       <div className='container banner__top'>
-        <h1>POKÉDEX</h1>
+        <h1>
+          POKÉDEX &mdash;{' '}
+          <span>
+            Fetching Data from <a href='https://pokeapi.co/'>Pokeapi</a>
+          </span>{' '}
+        </h1>
       </div>
 
       {status === 'loading' && (
@@ -33,7 +41,7 @@ const Pokemons = () => {
       {status === 'success' && (
         <div className='container'>
           <div className='pokemons-grid'>
-            {data.results.map((pokemon, index) => (
+            {resolvedData.results.map((pokemon, index) => (
               <PokemonCard
                 key={pokemon.name}
                 name={pokemon.name}
@@ -43,11 +51,17 @@ const Pokemons = () => {
             ))}
           </div>
           <div className='banner__bottom'>
-            <button className='btn-danger' onClick={() => setOffset(16)}>
-              16 more
+            <button
+              className='btn-danger'
+              onClick={() => setOffset(offset - 16)}
+            >
+              Previous page
             </button>
-            <button className='btn-primary' onClick={() => setOffset(32)}>
-              16 more
+            <button
+              className='btn-primary'
+              onClick={() => setOffset(offset + 16)}
+            >
+              Next page
             </button>
           </div>
         </div>
